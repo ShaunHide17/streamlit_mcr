@@ -123,6 +123,20 @@ with st.expander(""):
   )
   st.write(f'Data: {data.shape[0]} rows')      
   st.write(f'Data: {filtered.shape[0]} rows')
+  if st.checkbox("Code"):
+    st.code("""
+    companies = st.multiselect(
+        label = 'Companies Filter', 
+        options = data['company'].unique(),
+        default = data['company'].unique()
+    )
+    dates = st.slider(
+        label = 'Date Filter', 
+        min_value = data['transaction_date'].min(), 
+        max_value = data['transaction_date'].max(), 
+        value = (data['transaction_date'].min(), data['transaction_date'].max())
+    )
+    """, language = "python")
 
 st.markdown("### Cross filtering works*")
 with st.expander(""):
